@@ -65,4 +65,9 @@ public class Item {
   @ManyToMany(mappedBy = "items")
   @JsonIgnore
   private Set<Outfit> outfits = new HashSet<>();
+
+  @Override
+  public String toString() {
+    return this.uuid;
+  }
 }

@@ -51,7 +51,12 @@ public class ApplicationUser {
 
   private String email;
 
+  @JsonIgnore
+  private String password;
+
   private String name;
+
+  private Role role;
 
   @OneToMany(mappedBy = "user")
   @JsonIgnore
@@ -60,4 +65,9 @@ public class ApplicationUser {
   @OneToMany(mappedBy = "user")
   @JsonIgnore
   private Set<Outfit> outfits = new HashSet<>();
+
+  @Override
+  public String toString() {
+    return this.uuid;
+  }
 }

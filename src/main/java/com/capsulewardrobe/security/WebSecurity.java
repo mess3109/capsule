@@ -20,14 +20,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     http.cors().and().csrf().disable().authorizeRequests()
             .antMatchers(HttpMethod.POST, "/users/**").permitAll()
-            .antMatchers("/swagger-ui.html").permitAll()
-            .antMatchers("/swagger-resources").permitAll()
-            .antMatchers("/v2/api-docs").permitAll()
-            .antMatchers("/webjars/**").permitAll()
-//            .anyRequest().authenticated()
-//            .and().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
+            .anyRequest().authenticated()
             .and()
-//            .addFilterAfter(new JWTAuthorizationFilter(authenticationManager(), jwtVerifier, providerUserService), BasicAuthenticationFilter.class)
+            .addFilter(new JWTAuthenticationFilter(authenticationManager()))
+            .addFilter(new JWTAuthorizationFilter(authenticationManager()))
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
   }
 

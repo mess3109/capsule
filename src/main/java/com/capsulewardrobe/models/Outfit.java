@@ -65,4 +65,9 @@ public class Outfit {
           joinColumns = @JoinColumn(name = "outfit_id"),
           inverseJoinColumns = @JoinColumn(name = "item_id"))
   private Set<Item> items = new HashSet<>();
+
+  @Override
+  public String toString() {
+    return this.uuid;
+  }
 }
