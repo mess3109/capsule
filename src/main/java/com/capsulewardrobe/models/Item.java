@@ -51,6 +51,10 @@ public class Item {
   @JsonProperty(value = "id", access = JsonProperty.Access.READ_ONLY)
   private String uuid;
 
+  @ManyToOne
+  @JoinColumn(name = "category_id")
+  private Category category;
+
   private String title;
 
   private String color;
