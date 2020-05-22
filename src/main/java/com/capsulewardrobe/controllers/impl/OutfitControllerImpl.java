@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
-import java.util.Set;
+import java.net.URI;
 
 @Controller
 public class OutfitControllerImpl implements OutfitController {
@@ -23,9 +23,9 @@ public class OutfitControllerImpl implements OutfitController {
   @Override
   public ResponseEntity<Void> createOutfit(String userId, Outfit outfit) {
 
-    outfitService.create(userId, outfit);
+    Outfit createdOutfit = outfitService.create(userId, outfit);
 
-    return new ResponseEntity<>(HttpStatus.CREATED);
+    return ResponseEntity.created(URI.create("/outfits/" + createdOutfit.getUuid())).build();
   }
 
   @Override

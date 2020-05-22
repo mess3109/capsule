@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
+import java.net.URI;
+
 @Controller
 public class ItemControllerImpl implements ItemController {
 
@@ -19,9 +21,9 @@ public class ItemControllerImpl implements ItemController {
 
   public ResponseEntity<Void> createItem(String userId, Item item) {
 
-    itemService.create(userId, item);
+    Item createdItem = itemService.create(userId, item);
 
-    return new ResponseEntity<>(HttpStatus.CREATED);
+    return ResponseEntity.created(URI.create("/items/" + createdItem.getUuid())).build();
   }
 
   public ResponseEntity<Item> getItem(String userId, String itemId) throws BadRequestException {

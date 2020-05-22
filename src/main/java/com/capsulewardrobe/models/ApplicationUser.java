@@ -2,10 +2,8 @@ package com.capsulewardrobe.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -22,10 +20,8 @@ import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 
-@Table(indexes = {@Index(columnList = "uuid")})
+@Table(indexes = {@Index(columnList = "uuid"), @Index(columnList = "email")})
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @EqualsAndHashCode(of = "uuid", callSuper = false)
 @EntityListeners(AuditingEntityListener.class)
 @Getter
@@ -49,6 +45,7 @@ public class ApplicationUser {
   @JsonProperty(value = "id", access = JsonProperty.Access.READ_ONLY)
   private String uuid;
 
+  @Column(nullable = false, unique = true)
   private String email;
 
   @JsonIgnore
